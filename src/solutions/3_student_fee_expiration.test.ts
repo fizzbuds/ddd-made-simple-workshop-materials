@@ -151,7 +151,7 @@ describe("Student", () => {
           student.payFee(feeId1);
         });
 
-        it("should return unpaid fees with expiration in the past", () => {
+        it("should return unpaid fees in the past with expiration", () => {
           expect(student.getExpiredFees()).toEqual([
             {
               amount: 400,
