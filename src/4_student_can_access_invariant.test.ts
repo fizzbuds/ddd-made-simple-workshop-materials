@@ -1,6 +1,12 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { randomUUID } from "crypto";
 
+/**
+ * Come Insegnante di Musica,
+ voglio verificare le quote scadute,
+ così da sapere se può accedere al corso.
+ */
+
 class Student {
   private creditAmount = Amount.create(0);
   private paidAmount = Amount.create(0);
@@ -50,7 +56,7 @@ class Fees {
       amount: Amount;
       expiration: Date;
       paid: boolean;
-    }[] = []
+    }[] = [],
   ) {}
 
   static create() {

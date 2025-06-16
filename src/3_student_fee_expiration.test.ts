@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
+/**
+ * Come Insegnante di Musica,
+ voglio aggiungere la data di scadenza di una quota,
+ così da sapere quali sono le quote scadute.
+ */
+
 class Student {
   private creditAmount = Amount.create(0);
   private paidAmount = Amount.create(0);

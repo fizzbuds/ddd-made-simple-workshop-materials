@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
+/**
+ * Come Insegnante di Musica,
+ voglio aggiungere l'importo pagato dallo studente,
+ così da sapere quanto gli rimane da pagare.
+ */
+
 class Student {
   private creditAmount = 0;
   private paidAmount = 0;

@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
+/**
+ * Come Insegnante di Musica,
+ voglio aggiungere delle quote da pagare allo studente,
+ così da sapere quanto mi deve pagare in totale.
+ */
+
 class Student {
   private creditAmount = 0;
 

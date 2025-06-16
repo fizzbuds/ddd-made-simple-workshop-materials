@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
+/**
+ * Come Insegnante di Musica,
+ voglio aggiungere delle quote da pagare allo studente,
+ così da sapere quanto mi deve pagare in totale.
+ */
+
 describe("Student", () => {
   describe("Given a student", () => {
     let student: Student;

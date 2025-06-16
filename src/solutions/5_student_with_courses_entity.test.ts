@@ -1,6 +1,12 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { randomUUID } from "crypto";
 
+/**
+ * Come Insegnante di Musica,
+ voglio aggiungere i corsi dello studente,
+ così da sapere quali lezioni preparare.
+ */
+
 class Student {
   private creditAmount = Amount.create(0);
   private paidAmount = Amount.create(0);
@@ -104,7 +110,7 @@ class Fees {
       amount: Amount;
       expiration: Date;
       paid: boolean;
-    }[] = []
+    }[] = [],
   ) {}
 
   static create() {

@@ -1,7 +1,16 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
+/**
+ * Come Insegnante di Musica,
+ voglio sapere quanti studenti partecipano ad un corso,
+ così da sapere se accettarne di nuovi
+ */
+
 class MusicCourse {
-  constructor(private quota: number, private students = Students.create()) {}
+  constructor(
+    private quota: number,
+    private students = Students.create(),
+  ) {}
 
   getStudents() {
     return this.students.getStudents();
