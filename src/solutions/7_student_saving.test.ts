@@ -53,6 +53,55 @@ class StudentFeesRepo extends MongoAggregateRepo<
   }
 }
 
+describe("StudentFees serializer", () => {
+  const serializer = new StudentSerializer();
+
+  describe("aggregateToModel", () => {
+    it("should convert StudentFees to StudentFeesModel", () => {
+      const studentFees = new StudentFees("foo-id");
+      studentFees.addFee(100, new Date("2030-12-31"));
+
+      const model = serializer.aggregateToModel(studentFees);
+      expect(model).toEqual({
+        credit_amount: 100,
+        fees: [
+          {
+            amount: 100,
+            expiration: new Date("2030-12-31"),
+            id: expect.any(String),
+            paid: false,
+          },
+        ],
+        id: "foo-id",
+        paid_amount: 0,
+      });
+    });
+  });
+
+  describe("modelToAggregate", () => {
+    it("should convert StudentFeesModel to StudentFees", () => {
+      const model: StudentFeesModel = {
+        id: "foo-id",
+        credit_amount: 100,
+        paid_amount: 0,
+        fees: [
+          {
+            id: "fee-id",
+            amount: 100,
+            expiration: new Date("2030-12-31"),
+            paid: false,
+          },
+        ],
+      };
+
+      const studentFees = serializer.modelToAggregate(model);
+      expect(studentFees instanceof StudentFees).toBeTruthy();
+      expect(studentFees.getTotalCreditAmount()).toBe(100);
+      expect(studentFees.getExpiredFees().length).toBe(0);
+    });
+  });
+});
+
 describe("StudentFees repo", () => {
   const mongoClient = new MongoClient("mongodb://127.0.0.1:27017");
   const repo = new StudentFeesRepo(mongoClient);
