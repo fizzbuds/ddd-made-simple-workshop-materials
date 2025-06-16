@@ -6,7 +6,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 interface StudentFeesModel {
   id: string;
   credit_amount: number;
-  debit_amount: number;
+  paid_amount: number;
   fees: { id: string; amount: number; expiration: Date; paid: boolean }[];
 }
 
@@ -17,15 +17,15 @@ export class StudentSerializer
     return new StudentFees(
       model.id,
       new Amount(model.credit_amount),
-      new Amount(model.debit_amount),
+      new Amount(model.paid_amount),
       new Fees(
         model.fees.map((f) => ({
           id: f.id,
           amount: new Amount(f.amount),
           expiration: f.expiration,
           paid: f.paid,
-        })),
-      ),
+        }))
+      )
     );
   }
 
@@ -33,7 +33,7 @@ export class StudentSerializer
     return {
       id: aggregate.id,
       credit_amount: aggregate["creditAmount"].value,
-      debit_amount: aggregate["debitAmount"].value,
+      paid_amount: aggregate["paidAmount"].value,
       fees: aggregate["fees"]["fees"].map((f) => ({
         id: f.id,
         amount: f.amount.value,
@@ -87,8 +87,8 @@ class StudentFees {
   constructor(
     readonly id: string,
     private creditAmount = Amount.new(0),
-    private debitAmount = Amount.new(0),
-    private readonly fees = Fees.new(),
+    private paidAmount = Amount.new(0),
+    private readonly fees = Fees.new()
   ) {}
 
   addFee(amount: number, expiration: Date) {
@@ -99,7 +99,7 @@ class StudentFees {
 
   payFee(id: string) {
     const amount = this.fees.pay(id);
-    this.debitAmount = this.debitAmount.sum(amount);
+    this.paidAmount = this.paidAmount.sum(amount);
   }
 
   getTotalCreditAmount() {
@@ -107,7 +107,7 @@ class StudentFees {
   }
 
   getCreditAmount() {
-    return this.creditAmount.value - this.debitAmount.value;
+    return this.creditAmount.value - this.paidAmount.value;
   }
 
   getExpiredFees() {
@@ -135,7 +135,7 @@ class Fees {
       amount: Amount;
       expiration: Date;
       paid: boolean;
-    }[] = [],
+    }[] = []
   ) {}
 
   static new() {

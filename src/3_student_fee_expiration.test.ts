@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 class Student {
   private creditAmount = Amount.new(0);
-  private debitAmount = Amount.new(0);
+  private paidAmount = Amount.new(0);
 
   addFee(amount: number) {
     this.creditAmount = this.creditAmount.sum(Amount.new(amount));
   }
 
   payFee(amount: number) {
-    this.debitAmount = this.debitAmount.sum(Amount.new(amount));
+    this.paidAmount = this.paidAmount.sum(Amount.new(amount));
   }
 
   getTotalCreditAmount() {
@@ -17,7 +17,7 @@ class Student {
   }
 
   getCreditAmount() {
-    return this.creditAmount.value - this.debitAmount.value;
+    return this.creditAmount.value - this.paidAmount.value;
   }
 }
 

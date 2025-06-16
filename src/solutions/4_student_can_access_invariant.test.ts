@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 
 class Student {
   private creditAmount = Amount.new(0);
-  private debitAmount = Amount.new(0);
+  private paidAmount = Amount.new(0);
   private fees = Fees.new();
 
   addFee(amount: number, expiration: Date) {
@@ -14,7 +14,7 @@ class Student {
 
   payFee(id: string) {
     const amount = this.fees.pay(id);
-    this.debitAmount = this.debitAmount.sum(amount);
+    this.paidAmount = this.paidAmount.sum(amount);
   }
 
   getTotalCreditAmount() {
@@ -22,7 +22,7 @@ class Student {
   }
 
   getCreditAmount() {
-    return this.creditAmount.value - this.debitAmount.value;
+    return this.creditAmount.value - this.paidAmount.value;
   }
 
   getExpiredFees() {
@@ -55,7 +55,7 @@ class Fees {
       amount: Amount;
       expiration: Date;
       paid: boolean;
-    }[] = [],
+    }[] = []
   ) {}
 
   static new() {
