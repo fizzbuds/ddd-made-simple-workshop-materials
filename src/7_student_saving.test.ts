@@ -43,7 +43,6 @@ describe("StudentFees repo", () => {
 
     expect(creditAmount).toEqual(sameStudentFees.getTotalCreditAmount());
     expect(sameStudentFees.getExpiredFees().length).toBe(1);
-    //expect(JSON.stringify(studentFees)).toBe(JSON.stringify(sameStudentFees));
   });
 });
 
