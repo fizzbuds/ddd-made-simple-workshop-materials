@@ -66,7 +66,7 @@ describe("Student", () => {
         });
 
         it("should decrease the credit amount", () => {
-          expect(student.getCreditAmount()).toBe(400);
+          expect(student.getTotalCreditAmount()).toBe(400);
         });
       });
     });

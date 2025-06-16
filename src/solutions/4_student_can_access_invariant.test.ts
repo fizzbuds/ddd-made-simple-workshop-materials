@@ -18,11 +18,7 @@ class Student {
   }
 
   getTotalCreditAmount() {
-    return this.creditAmount.value;
-  }
-
-  getCreditAmount() {
-    return this.creditAmount.value - this.paidAmount.value;
+    return this.creditAmount.substract(this.paidAmount).value;
   }
 
   getExpiredFees() {
@@ -45,6 +41,10 @@ class Amount {
 
   sum(amount: Amount) {
     return Amount.new(amount.value + this.value);
+  }
+
+  substract(amount: Amount) {
+    return Amount.new(this.value - amount.value);
   }
 }
 
@@ -140,7 +140,7 @@ describe("Student", () => {
         });
 
         it("should decrease the credit amount", () => {
-          expect(student.getCreditAmount()).toBe(900);
+          expect(student.getTotalCreditAmount()).toBe(900);
         });
 
         it("should throw if is already paid", () => {

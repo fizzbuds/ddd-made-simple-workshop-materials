@@ -72,12 +72,12 @@ describe("StudentFees repo", () => {
 
     studentFees.addFee(100, new Date("2025-12-31"));
     studentFees.addFee(100, new Date("2023-12-31"));
-    const creditAmount = studentFees.getCreditAmount();
+    const creditAmount = studentFees.getTotalCreditAmount();
 
     await repo.save(studentFees);
     const sameStudentFees = await repo.getByIdOrThrow(id);
 
-    expect(creditAmount).toEqual(sameStudentFees.getCreditAmount());
+    expect(creditAmount).toEqual(sameStudentFees.getTotalCreditAmount());
     expect(sameStudentFees.getExpiredFees().length).toBe(1);
     //expect(JSON.stringify(studentFees)).toBe(JSON.stringify(sameStudentFees));
   });
@@ -103,11 +103,7 @@ class StudentFees {
   }
 
   getTotalCreditAmount() {
-    return this.creditAmount.value;
-  }
-
-  getCreditAmount() {
-    return this.creditAmount.value - this.paidAmount.value;
+    return this.creditAmount.substract(this.paidAmount).value;
   }
 
   getExpiredFees() {
@@ -125,6 +121,10 @@ class Amount {
 
   sum(amount: Amount) {
     return Amount.new(amount.value + this.value);
+  }
+
+  substract(amount: Amount) {
+    return Amount.new(this.value - amount.value);
   }
 }
 
