@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 class Student {
-  private creditAmount = Amount.new(0);
-  private paidAmount = Amount.new(0);
+  private creditAmount = Amount.create(0);
+  private paidAmount = Amount.create(0);
 
   addFee(amount: number) {
-    this.creditAmount = this.creditAmount.sum(Amount.new(amount));
+    this.creditAmount = this.creditAmount.sum(Amount.create(amount));
   }
 
   payFee(amount: number) {
-    this.paidAmount = this.paidAmount.sum(Amount.new(amount));
+    this.paidAmount = this.paidAmount.sum(Amount.create(amount));
   }
 
   getTotalCreditAmount() {
@@ -20,17 +20,17 @@ class Student {
 class Amount {
   constructor(public readonly value: number) {}
 
-  static new(value: number) {
+  static create(value: number) {
     if (value < 0) throw new Error("Amount must be positive");
     return new Amount(value);
   }
 
   sum(amount: Amount) {
-    return Amount.new(amount.value + this.value);
+    return Amount.create(amount.value + this.value);
   }
 
   substract(amount: Amount) {
-    return Amount.new(this.value - amount.value);
+    return Amount.create(this.value - amount.value);
   }
 }
 

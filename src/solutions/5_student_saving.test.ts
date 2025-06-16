@@ -86,14 +86,14 @@ describe("StudentFees repo", () => {
 class StudentFees {
   constructor(
     readonly id: string,
-    private creditAmount = Amount.new(0),
-    private paidAmount = Amount.new(0),
-    private readonly fees = Fees.new()
+    private creditAmount = Amount.create(0),
+    private paidAmount = Amount.create(0),
+    private readonly fees = Fees.create()
   ) {}
 
   addFee(amount: number, expiration: Date) {
     const id = this.fees.add(amount, expiration);
-    this.creditAmount = this.creditAmount.sum(Amount.new(amount));
+    this.creditAmount = this.creditAmount.sum(Amount.create(amount));
     return id;
   }
 
@@ -114,17 +114,17 @@ class StudentFees {
 class Amount {
   constructor(public readonly value: number) {}
 
-  static new(value: number) {
+  static create(value: number) {
     if (value < 0) throw new Error("Amount must be positive");
     return new Amount(value);
   }
 
   sum(amount: Amount) {
-    return Amount.new(amount.value + this.value);
+    return Amount.create(amount.value + this.value);
   }
 
   substract(amount: Amount) {
-    return Amount.new(this.value - amount.value);
+    return Amount.create(this.value - amount.value);
   }
 }
 
@@ -138,13 +138,18 @@ class Fees {
     }[] = []
   ) {}
 
-  static new() {
+  static create() {
     return new Fees();
   }
 
   add(amount: number, expiration: Date) {
     const id = randomUUID();
-    this.fees.push({ id, amount: Amount.new(amount), expiration, paid: false });
+    this.fees.push({
+      id,
+      amount: Amount.create(amount),
+      expiration,
+      paid: false,
+    });
 
     return id;
   }

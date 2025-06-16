@@ -1,10 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 class MusicCourse {
-  constructor(
-    private quota: number,
-    private students = Students.new(),
-  ) {}
+  constructor(private quota: number, private students = Students.create()) {}
 
   getStudents() {
     return this.students.getStudents();
@@ -21,7 +18,7 @@ class MusicCourse {
 class Students {
   constructor(private students: { id: string }[] = []) {}
 
-  static new() {
+  static create() {
     return new Students();
   }
 
