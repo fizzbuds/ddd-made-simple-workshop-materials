@@ -14,4 +14,7 @@ pnpm vitest src/1_student.test.ts
 
 # Run solutions tests
 pnpm vitest run src/solutions
+
+# Run music-school sample app
+pnpm tsx --watch music-school-sample-app/src/index.ts
 ```

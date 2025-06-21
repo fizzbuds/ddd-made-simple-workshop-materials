@@ -1,0 +1,23 @@
+meta {
+  name: Pay fee
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/student-fees/:studentId/fees/:feeId/pay
+  body: json
+  auth: none
+}
+
+params:path {
+  feeId: a4e7cc0d-4ce3-4e31-a549-ec535eaef00e
+  studentId: 1
+}
+
+body:json {
+  {
+    "amount": 100,
+    "expiration": "2025-01-01"
+  }
+}

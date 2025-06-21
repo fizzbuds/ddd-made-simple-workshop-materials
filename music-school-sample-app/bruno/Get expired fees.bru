@@ -1,0 +1,26 @@
+meta {
+  name: Get expired fees
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:3000/student-fees/:studentId/fees?expired=sa
+  body: none
+  auth: none
+}
+
+params:query {
+  expired: sa
+}
+
+params:path {
+  studentId: 1
+}
+
+body:json {
+  {
+    "amount": 100,
+    "expiration": "2025-01-01"
+  }
+}

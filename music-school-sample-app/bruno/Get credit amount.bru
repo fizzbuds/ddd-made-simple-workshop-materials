@@ -1,0 +1,22 @@
+meta {
+  name: Get credit amount
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/student-fees/:studentId/credit-amount
+  body: none
+  auth: none
+}
+
+params:path {
+  studentId: 1
+}
+
+body:json {
+  {
+    "amount": 100,
+    "expiration": "2025-01-01"
+  }
+}
