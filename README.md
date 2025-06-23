@@ -17,4 +17,7 @@ pnpm vitest run src/solutions
 
 # Run music-school sample app
 pnpm tsx --watch music-school-sample-app/src/index.ts
+
+# Run music-school sample app e2e tests
+pnpm vitest music-school-sample-app/tests/e2e.test.ts
 ```

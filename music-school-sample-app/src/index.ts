@@ -13,14 +13,23 @@ app.get("/", (c) => {
 
 StudentFeesModule(app);
 
-serve(
-  {
-    fetch: app.fetch,
-    port: 3000,
-  },
-  (info) => {
-    console.log(`Music school api is running on http://localhost:${info.port}`);
+function start() {
+  if (process.env.TEST) return;
+  serve(
+    {
+      fetch: app.fetch,
+      port: 3000,
+    },
+    (info) => {
+      console.log(
+        `Music school api is running on http://localhost:${info.port}`,
+      );
 
-    showRoutes(app);
-  },
-);
+      showRoutes(app);
+    },
+  );
+}
+
+start();
+
+export default app;
