@@ -1,7 +1,7 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import {beforeAll, describe, expect, it} from "vitest";
 import app from "../src/index";
-import { MongoClient } from "mongodb";
-import { randomUUID } from "crypto";
+import {MongoClient} from "mongodb";
+import {randomUUID} from "crypto";
 
 describe("Music School api", () => {
   const mongoClient = new MongoClient("mongodb://127.0.0.1:27017");
@@ -56,8 +56,7 @@ describe("Music School api", () => {
   });
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function postRequest(url: string, body?: any) {
+function postRequest(url: string, body?: unknown) {
   return app.request(url, {
     method: "POST",
     body: body ? JSON.stringify(body) : undefined,

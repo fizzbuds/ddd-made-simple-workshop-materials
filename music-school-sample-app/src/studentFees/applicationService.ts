@@ -1,7 +1,7 @@
-import { StudentFees } from "./domain";
-import { Repo } from "./repo";
+import {StudentFees} from "./domain";
+import {IRepo} from "@fizzbuds/ddd-toolkit";
 
-export function ApplicationService(repo: Repo) {
+export function ApplicationService(repo: IRepo<StudentFees>) {
   return {
     async addFee(studentId: string, amount: number, expiration: Date) {
       const studentFees = await getOrCreate(studentId);

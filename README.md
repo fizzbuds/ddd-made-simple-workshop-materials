@@ -2,22 +2,38 @@
 
 Hands-on exercises and examples from the 'DDD made simple' workshop.
 
+## Setup
+
+Install dependencies:
 ```bash
-# Install deps
-pnpm Install
+pnpm install
+```
 
-# Start mongo in memory
+Start mongo in memory:
+```bash
 pnpm tsx src/utils/mongo-memory-repl-set.ts
+```
 
-# Run test watch for 1_student.test.ts
+## Running Tests
+
+Run test watch for 1_student.test.ts:
+```bash
 pnpm vitest src/1_student.test.ts
+```
 
-# Run solutions tests
+Run solutions tests:
+```bash
 pnpm vitest run src/solutions
+```
 
-# Run music-school sample app
+## Music School Sample App
+
+Run the sample app:
+```bash
 pnpm tsx --watch music-school-sample-app/src/index.ts
+```
 
-# Run music-school sample app e2e tests
-pnpm vitest music-school-sample-app/tests/e2e.test.ts
+Run component tests:
+```bash
+pnpm vitest music-school-sample-app/tests/component.test.ts
 ```

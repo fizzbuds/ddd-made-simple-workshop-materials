@@ -2,19 +2,11 @@ import { ISerializer, MongoAggregateRepo } from "@fizzbuds/ddd-toolkit";
 import { MongoClient } from "mongodb";
 import { Amount, Fees, StudentFees } from "./domain";
 
-export function Repo() {
-  const mongoClient = new MongoClient("mongodb://127.0.0.1:27017");
-
-  const repo = new MongoAggregateRepo<StudentFees, StudentFeesModel>(
-    new StudentSerializer(),
-    mongoClient,
-    "students_fees",
-  );
-
-  return repo;
+export class StudentFeesRepository extends MongoAggregateRepo<StudentFees, StudentFeesModel> {
+  constructor(mongoClient: MongoClient) {
+    super(new StudentSerializer(), mongoClient, "students_fees");
+  }
 }
-
-export type Repo = ReturnType<typeof Repo>;
 
 class StudentSerializer implements ISerializer<StudentFees, StudentFeesModel> {
   public modelToAggregate(model: StudentFeesModel): StudentFees {
