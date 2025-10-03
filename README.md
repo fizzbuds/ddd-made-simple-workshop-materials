@@ -11,7 +11,7 @@ pnpm install
 
 Start mongo in memory:
 ```bash
-pnpm tsx src/utils/mongo-memory-repl-set.ts
+pnpm tsx utils/mongo-memory-repl-set.ts
 ```
 
 ## Running Tests
