@@ -24,7 +24,7 @@ class Student {
   }
 
   getTotalCreditAmount() {
-    return this.creditAmount.substract(this.paidAmount).value;
+    return this.creditAmount.subtract(this.paidAmount).value;
   }
 
   getExpiredFees() {
@@ -44,7 +44,7 @@ class Amount {
     return Amount.create(amount.value + this.value);
   }
 
-  substract(amount: Amount) {
+  subtract(amount: Amount) {
     return Amount.create(this.value - amount.value);
   }
 }
