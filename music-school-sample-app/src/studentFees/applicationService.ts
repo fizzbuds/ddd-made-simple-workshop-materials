@@ -1,5 +1,5 @@
-import {StudentFees} from "./domain";
-import {IRepo} from "@fizzbuds/ddd-toolkit";
+import { StudentFees } from "./domain";
+import { IRepo } from "@fizzbuds/ddd-toolkit";
 
 export function ApplicationService(repo: IRepo<StudentFees>) {
   return {
@@ -16,11 +16,11 @@ export function ApplicationService(repo: IRepo<StudentFees>) {
       return feeId;
     },
     async getTotalCreditAmount(studentId: string) {
-      const studentFees = await repo.getById(studentId);
+      const studentFees = await repo.getByIdOrThrow(studentId);
       return studentFees ? studentFees.getTotalCreditAmount() : 0;
     },
     async getExpiredFees(studentId: string) {
-      const studentFees = await repo.getById(studentId);
+      const studentFees = await repo.getByIdOrThrow(studentId);
       return studentFees ? studentFees.getExpiredFees() : [];
     },
   };
