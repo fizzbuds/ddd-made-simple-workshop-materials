@@ -109,6 +109,7 @@ describe("Student", () => {
           expect(student.getExpiredFees()).toEqual([
             {
               amount: 400,
+              id: expect.any(String),
               expiration: new Date("2025-03-01"),
             },
           ]);

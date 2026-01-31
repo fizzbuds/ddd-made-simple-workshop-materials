@@ -88,7 +88,7 @@ class Fees {
   getExpired() {
     return this.fees
       .filter((f) => f.paid === false && f.expiration.getTime() < Date.now())
-      .map((f) => ({ amount: f.amount.value, expiration: f.expiration }));
+      .map((f) => ({ id: f.id, amount: f.amount.value, expiration: f.expiration }));
   }
 }
 
@@ -161,6 +161,7 @@ describe("Student", () => {
           expect(student.getExpiredFees()).toEqual([
             {
               amount: 400,
+              id: expect.any(String),
               expiration: new Date("2025-03-01"),
             },
           ]);
