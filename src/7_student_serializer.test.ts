@@ -32,7 +32,7 @@ describe("StudentFees serializer", () => {
   describe("aggregateToModel", () => {
     it("should convert StudentFees to StudentFeesModel", () => {
       const studentFees = new StudentFees("foo-id");
-      studentFees.addFee(100, new Date("2030-12-31"));
+      studentFees.issueFee(100, new Date("2030-12-31"));
 
       const model = serializer.aggregateToModel(studentFees);
       expect(model).toEqual({
@@ -83,8 +83,8 @@ class StudentFees {
     private readonly fees = Fees.create(),
   ) {}
 
-  addFee(amount: number, expiration: Date) {
-    const id = this.fees.add(amount, expiration);
+  issueFee(amount: number, expiration: Date) {
+    const id = this.fees.issue(amount, expiration);
     this.creditAmount = this.creditAmount.sum(Amount.create(amount));
     return id;
   }
@@ -134,7 +134,7 @@ class Fees {
     return new Fees();
   }
 
-  add(amount: number, expiration: Date) {
+  issue(amount: number, expiration: Date) {
     const id = randomUUID();
     this.fees.push({
       id,

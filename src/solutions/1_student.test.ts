@@ -9,7 +9,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 class Student {
   private creditAmount = 0;
 
-  addFee(amount: number) {
+  issueFee(amount: number) {
     this.creditAmount += amount;
   }
 
@@ -30,9 +30,9 @@ describe("Student", () => {
       expect(student.getTotalCreditAmount()).toBe(0);
     });
 
-    describe("When adding a fee", () => {
+    describe("When issuing a fee", () => {
       beforeEach(() => {
-        student.addFee(100);
+        student.issueFee(100);
       });
 
       it("should increase the total credit amount", () => {
@@ -40,10 +40,10 @@ describe("Student", () => {
       });
     });
 
-    describe("When adding multiple fees", () => {
+    describe("When issuing multiple fees", () => {
       beforeEach(() => {
-        student.addFee(100);
-        student.addFee(200);
+        student.issueFee(100);
+        student.issueFee(200);
       });
 
       it("should calculate the correct total credit amount", () => {

@@ -41,15 +41,15 @@ describe("StudentFees repo", () => {
       await repo.save(studentFees);
     });
 
-    describe("When add fee", () => {
+    describe("When issue fee", () => {
       let feeId: string;
       beforeEach(async () => {
         const studentFees = await repo.getByIdOrThrow(id);
-        feeId = studentFees.addFee(100, new Date("2025-12-31"));
+        feeId = studentFees.issueFee(100, new Date("2025-12-31"));
         await repo.save(studentFees);
       });
 
-      it("should persist added fee", async () => {
+      it("should persist issued fee", async () => {
         const studentFees = await repo.getByIdOrThrow(id);
         expect(studentFees.getTotalCreditAmount()).toBe(100);
       });
@@ -119,8 +119,8 @@ class StudentFees {
     private readonly fees = Fees.create(),
   ) {}
 
-  addFee(amount: number, expiration: Date) {
-    const id = this.fees.add(amount, expiration);
+  issueFee(amount: number, expiration: Date) {
+    const id = this.fees.issue(amount, expiration);
     this.creditAmount = this.creditAmount.sum(Amount.create(amount));
     return id;
   }
@@ -170,7 +170,7 @@ class Fees {
     return new Fees();
   }
 
-  add(amount: number, expiration: Date) {
+  issue(amount: number, expiration: Date) {
     const id = randomUUID();
     this.fees.push({
       id,

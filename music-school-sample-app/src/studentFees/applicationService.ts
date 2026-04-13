@@ -3,9 +3,9 @@ import { IRepo } from "@fizzbuds/ddd-toolkit";
 
 export function ApplicationService(repo: IRepo<StudentFees>) {
   return {
-    async addFee(studentId: string, amount: number, expiration: Date) {
+    async issueFee(studentId: string, amount: number, expiration: Date) {
       const studentFees = await getOrCreate(studentId);
-      const feeId = studentFees.addFee(amount, expiration);
+      const feeId = studentFees.issueFee(amount, expiration);
       await repo.save(studentFees);
       return feeId;
     },

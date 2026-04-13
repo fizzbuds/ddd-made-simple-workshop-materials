@@ -12,8 +12,8 @@ class Student {
   private paidAmount = Amount.create(0);
   private fees = Fees.create();
 
-  addFee(amount: number, expiration: Date) {
-    const id = this.fees.add(amount, expiration);
+  issueFee(amount: number, expiration: Date) {
+    const id = this.fees.issue(amount, expiration);
     this.creditAmount = this.creditAmount.sum(Amount.create(amount));
     return id;
   }
@@ -68,7 +68,7 @@ class Fees {
     return new Fees();
   }
 
-  add(amount: number, expiration: Date) {
+  issue(amount: number, expiration: Date) {
     const id = randomUUID();
     this.fees.push({
       id,
@@ -109,9 +109,9 @@ describe("Student", () => {
       expect(student.getTotalCreditAmount()).toBe(0);
     });
 
-    describe("When adding a fee", () => {
+    describe("When issuing a fee", () => {
       beforeEach(() => {
-        student.addFee(100, new Date("2025-02-01"));
+        student.issueFee(100, new Date("2025-02-01"));
       });
 
       it("should increase the total credit amount", () => {
@@ -119,14 +119,14 @@ describe("Student", () => {
       });
 
       it("should throw if amount is negative", () => {
-        expect(() => student.addFee(-100, new Date("2025-02-01"))).toThrow();
+        expect(() => student.issueFee(-100, new Date("2025-02-01"))).toThrow();
       });
     });
 
-    describe("When adding multiple fees", () => {
+    describe("When issuing multiple fees", () => {
       beforeEach(() => {
-        student.addFee(100, new Date("2025-02-01"));
-        student.addFee(200, new Date("2025-03-01"));
+        student.issueFee(100, new Date("2025-02-01"));
+        student.issueFee(200, new Date("2025-03-01"));
       });
 
       it("should calculate the correct total credit amount", () => {
@@ -140,9 +140,9 @@ describe("Student", () => {
       let feeId3: string;
 
       beforeEach(() => {
-        feeId1 = student.addFee(300, new Date("2025-02-01"));
-        feeId2 = student.addFee(400, new Date("2025-03-01"));
-        feeId3 = student.addFee(500, new Date("2030-03-01"));
+        feeId1 = student.issueFee(300, new Date("2025-02-01"));
+        feeId2 = student.issueFee(400, new Date("2025-03-01"));
+        feeId3 = student.issueFee(500, new Date("2030-03-01"));
       });
 
       describe("When pay a fee", () => {

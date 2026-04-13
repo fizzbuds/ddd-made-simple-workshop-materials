@@ -16,7 +16,7 @@ export function Controller(app: Hono, applicationService: ApplicationService) {
     async (c) => {
       const body = await c.req.json();
 
-      const feeId = await applicationService.addFee(
+      const feeId = await applicationService.issueFee(
         c.req.param("studentId"),
         body.amount,
         new Date(body.expiration),

@@ -13,8 +13,8 @@ class Student {
   private fees = Fees.create();
   private courses = Courses.create();
 
-  addFee(amount: number, expiration: Date) {
-    const id = this.fees.add(amount, expiration);
+  issueFee(amount: number, expiration: Date) {
+    const id = this.fees.issue(amount, expiration);
     this.creditAmount = this.creditAmount.sum(Amount.create(amount));
     return id;
   }
@@ -117,7 +117,7 @@ class Fees {
     return new Fees();
   }
 
-  add(amount: number, expiration: Date) {
+  issue(amount: number, expiration: Date) {
     const id = randomUUID();
     this.fees.push({
       id,

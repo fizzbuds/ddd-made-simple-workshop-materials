@@ -10,7 +10,7 @@ class Student {
   private creditAmount = Amount.create(0);
   private paidAmount = Amount.create(0);
 
-  addFee(amount: number) {
+  issueFee(amount: number) {
     this.creditAmount = this.creditAmount.sum(Amount.create(amount));
   }
 
@@ -52,9 +52,9 @@ describe("Student", () => {
       expect(student.getTotalCreditAmount()).toBe(0);
     });
 
-    describe("When adding a fee", () => {
+    describe("When issuing a fee", () => {
       beforeEach(() => {
-        student.addFee(100);
+        student.issueFee(100);
       });
 
       it("should increase the total credit amount", () => {
@@ -62,14 +62,14 @@ describe("Student", () => {
       });
 
       it("should throw if amount is negative", () => {
-        expect(() => student.addFee(-100)).toThrow();
+        expect(() => student.issueFee(-100)).toThrow();
       });
     });
 
-    describe("When adding multiple fees", () => {
+    describe("When issuing multiple fees", () => {
       beforeEach(() => {
-        student.addFee(100);
-        student.addFee(200);
+        student.issueFee(100);
+        student.issueFee(200);
       });
 
       it("should calculate the correct total credit amount", () => {
@@ -79,8 +79,8 @@ describe("Student", () => {
 
     describe("Given some fees", () => {
       beforeEach(() => {
-        student.addFee(300);
-        student.addFee(400);
+        student.issueFee(300);
+        student.issueFee(400);
       });
 
       describe("When pay a fee", () => {
