@@ -13,11 +13,16 @@ export class StudentSerializer
   implements ISerializer<StudentFees, StudentFeesModel>
 {
   public modelToAggregate(model: StudentFeesModel): StudentFees {
-    return
+    return new StudentFees()
   }
 
   public aggregateToModel(aggregate: StudentFees): StudentFeesModel {
-    return
+    return {
+      id: aggregate.id,
+      credit_amount: undefined,
+      paid_amount: undefined,
+      fees: {}
+    }
   }
 }
 
