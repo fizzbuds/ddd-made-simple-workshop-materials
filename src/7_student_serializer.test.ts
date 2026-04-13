@@ -19,7 +19,7 @@ export class StudentSerializer
   public aggregateToModel(aggregate: StudentFees): StudentFeesModel {
     return {
       id: aggregate.id,
-      credit_amount: undefined,
+      credit_amount: aggregate["creditAmount"].value,
       paid_amount: undefined,
       fees: {}
     }
