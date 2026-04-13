@@ -2,14 +2,23 @@ import { ISerializer } from "@fizzbuds/ddd-toolkit";
 import { randomUUID } from "crypto";
 import { describe, expect, it } from "vitest";
 
-interface StudentFeesModel {}
+interface StudentFeesModel {
+  id: string;
+  credit_amount: number;
+  paid_amount: number;
+  fees: { id: string; amount: number; expiration: Date; paid: boolean }[];
+}
 
 export class StudentSerializer
   implements ISerializer<StudentFees, StudentFeesModel>
 {
-  public modelToAggregate(model: StudentFeesModel): StudentFees {}
+  public modelToAggregate(model: StudentFeesModel): StudentFees {
+    return
+  }
 
-  public aggregateToModel(aggregate: StudentFees): StudentFeesModel {}
+  public aggregateToModel(aggregate: StudentFees): StudentFeesModel {
+    return
+  }
 }
 
 describe("StudentFees serializer", () => {
